@@ -1,21 +1,32 @@
-import { getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { useState } from 'react';
 import './App.css';
 import app from './firebase.init';
 
 const auth = getAuth(app);
 
-const handleEmailBlur = event => {
-  console.log(event.target.value);
-};
-const handlePasswordBlur = event => {
-  console.log(event.target.value);
-};
-const handleFormSubmit = event => {
-  console.log('form submitted');
-  event.preventDefault();
-};
-
 function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailBlur = event => {
+    setEmail(event.target.value);
+  };
+  const handlePasswordBlur = event => {
+    setPassword(event.target.value);
+  };
+  const handleFormSubmit = event => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    event.preventDefault();
+  };
+
   return (
     <>
       <div className="min-h-screen flex justify-center items-center bg-white">
@@ -55,7 +66,7 @@ function App() {
             </div>
           </form>
           <div className="flex space-x-1 p-20 text-sm">
-            <p className="hover:underline cursor-pointer">German</p>
+            <p className="hover:underline cursor-pointer">Bangla</p>
             <div className="border-r-[1px] border-r-slate-300"></div>
             <p className="font-bold hover:underline cursor-pointer">English</p>
           </div>
