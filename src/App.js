@@ -22,8 +22,7 @@ function App() {
         <div className="p-10 border-[1px] -mt-10 border-slate-200 rounded-md flex flex-col items-center space-y-3">
           <div className="py-8">
             <img
-              width="30"
-              className="-mt-10"
+              className="-mt-10 w-8"
               src="https://www.paypalobjects.com/images/shared/momgram@2x.png"
             />
           </div>
